@@ -9,6 +9,10 @@ module ActiveSnapshot
     end
 
     def create_snapshot!(identifier: nil, user: nil, metadata: nil)
+      ### ProductPlan customization
+      return unless self.has_snapshots_enabled?
+      ### /ProductPlan customization
+
       snapshot = snapshots.create!({
         identifier: identifier,
         user_id: (user.id if user),
